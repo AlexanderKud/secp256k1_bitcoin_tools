@@ -8,7 +8,7 @@ import string_utils # python3 -m pip install string-utils
 #123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz - Base58
 #Kw Kx Ky Kz L1 L2 L3 L4 L5
 alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
-iterations = 100
+iterations = 10
 for _ in range(iterations):
     string_utils.shuffle(alphabet)
     start = 'L5'
