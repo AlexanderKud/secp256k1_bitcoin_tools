@@ -3,7 +3,7 @@ import base58       # python3 -m pip install base58
 import binascii
 from bit import Key # python3 -m pip install bit
 import random
-import string_utils # python3 -m pip install string-utils
+import string_utils # python3 -m pip install python-string-utils
 
 #123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz - Base58
 #5H 5J 5K
@@ -11,7 +11,7 @@ alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 iterations = 10
 for _ in range(iterations):
     string_utils.shuffle(alphabet)
-    start = '5KFunnyShit'
+    start = '5J'
     iterator = 51 - len(start)
     for i in range(iterator):
         start += random.choice(alphabet)
