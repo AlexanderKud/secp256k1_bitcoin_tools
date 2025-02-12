@@ -10,11 +10,11 @@ import string_utils # python3 -m pip install python-string-utils
 alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 iterations = 10
 for _ in range(iterations):
-    string_utils.shuffle(alphabet)
+    shuffled_alphabet = string_utils.shuffle(alphabet)
     start = 'Kz'
     iterator = 52 - len(start)
     for i in range(iterator):
-        start += random.choice(alphabet)    
+        start += random.choice(shuffled_alphabet)    
     wif = start
     first_encode = base58.b58decode(wif)
     private_key_full = binascii.hexlify(first_encode)
