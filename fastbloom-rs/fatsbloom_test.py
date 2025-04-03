@@ -1,0 +1,25 @@
+from fastbloom_rs import BloomFilter
+
+bloom = BloomFilter(2**30, 0.0000001)
+
+bloom.add_str('hello')
+bloom.add_bytes(b'world')
+bloom.add_int(9527)
+print(bloom.contains('hello'))
+print(bloom.contains(b'world'))
+print(bloom.contains(9527))
+print(bloom.contains('hello world'))
+print(f'Hashes: {bloom.hashes()}')
+print()
+f = open("bloomfilter.bf", "wb")
+f.write(bloom.get_bytes())
+f.close()
+
+f = open("bloomfilter.bf", "rb")
+data = f .read()
+f.close()
+bloom2 = BloomFilter.from_bytes(data, bloom.hashes()) 
+print(bloom2.contains('hello'))
+print(bloom2.contains(b'world'))
+print(bloom2.contains(9527))
+print(bloom2.contains('hello world'))
