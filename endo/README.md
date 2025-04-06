@@ -5,11 +5,9 @@ Mysterious Numbers of Bitcoin Cryptography
 
 If you know about Elliptic curves and cryptography , this project will be mysterious for you:
 
-
 Our topic is about curve-secp256k1 security level decreation!
 
-
-There is two individual numbers when multipleis to any point on curve-secp256k1 , returns 2 other points on curve with exact same y-coordinate;
+There is two individual numbers when multiplied to any point on curve-secp256k1 , returns 2 other points on curve with exact same y-coordinate;
 
 consider K is a point on curve , there is two fixed numbers as N1 and N2 ,
 
