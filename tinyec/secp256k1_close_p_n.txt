@@ -1,0 +1,28 @@
+we could use lower p and n to do research. the equation stays the same( y**2 mod p = x**3+7 mod p ).
+conditions close to secp256k1: both p(prime field modulus) and n(group order) should be prime numbers.
+p > n.
+(n-1) is divisible by 2 and yields an even number (middle point scalar).
+(n-1) is divisible by 3 and yields the number of distinct y-coordinates(each y-coordinate has three distinct x-coordinates).
+
+possible candidates:
+prime(p)=349 order(n)=313
+prime(p)=433 order(n)=397
+prime(p)=1303 order(n)=1249
+prime(p)=1831 order(n)=1753
+prime(p)=2143 order(n)=2089
+prime(p)=2731 order(n)=2689
+prime(p)=3511 order(n)=3433
+prime(p)=3571 order(n)=3469
+prime(p)=4597 order(n)=4513
+prime(p)=5107 order(n)=4993
+prime(p)=5281 order(n)=5233
+prime(p)=6091 order(n)=5953
+prime(p)=6529 order(n)=6397
+prime(p)=6619 order(n)=6469
+prime(p)=7219 order(n)=7069
+prime(p)=7459 order(n)=7297
+prime(p)=7537 order(n)=7369
+prime(p)=7603 order(n)=7477
+prime(p)=8293 order(n)=8209
+prime(p)=8581 order(n)=8461
+prime(p)=9811 order(n)=9649
