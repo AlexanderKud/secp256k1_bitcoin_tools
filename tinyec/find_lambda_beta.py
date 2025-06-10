@@ -1,0 +1,15 @@
+p = 115792089237316195423570985008687907853269984665640564039457584007908834671663
+n = 115792089237316195423570985008687907852837564279074904382605163141518161494337
+p = 349
+n = 313
+lambda1 = pow(3, (n-1)//3, n)
+beta1 = pow(2, (p-1)//3, p)
+lambda2 = (lambda1*lambda1) % n
+beta2 = (beta1*beta1) % p
+print("Lambda")
+print(lambda1)
+print(lambda2)
+print()
+print("Beta")
+print(beta1)
+print(beta2)
