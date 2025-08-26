@@ -1,3 +1,0 @@
-gcc -c -DBUILD_DLL adder.c
-gcc -shared -o adder.dll adder.o
-pause
