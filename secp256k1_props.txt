@@ -1,4 +1,4 @@
-endomorhism properties:
+endomorphism properties:
 example of 1 scalar from keys of secp256k1 (the same holds for point operations)
 1
 a =  78074008874160198520644763525212887401909906723592317393988542598630163514318 lambda2
