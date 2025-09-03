@@ -7,9 +7,9 @@ If you know about Elliptic curves and cryptography , this project will be myster
 
 Our topic is about curve-secp256k1 security level decreation!
 
-There is two individual numbers when multiplied to any point on curve-secp256k1 , returns 2 other points on curve with exact same y-coordinate;
+There are two individual numbers when multiplied to any point on curve-secp256k1 , return 2 other points on curve with exact same y-coordinate;
 
-consider K is a point on curve , there is two fixed numbers as N1 and N2 ,
+consider K is a point on curve , there are two fixed numbers as N1 and N2 ,
 
 if: K\*N1=C1 and K*N2=C2 , then : y(K) = y(C1) = y(C2)
 
