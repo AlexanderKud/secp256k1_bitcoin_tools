@@ -117,6 +117,8 @@ def check():
     secp256k1.check()
     
 def scalar_multiplication(pk):
+    pk = pk % N
+    if pk < 0: pk = N + pk
     pvk = str(pk).encode()
     res = bytes(65)
     secp256k1.scalar_multiplication(pvk, res)
@@ -293,4 +295,3 @@ def bloom_add(index, item):
 def bloom_check(index, item):
     if type(item) != bytes: item = str(item).encode()
     return secp256k1.bloom_check(index, item, len(item))
-    
