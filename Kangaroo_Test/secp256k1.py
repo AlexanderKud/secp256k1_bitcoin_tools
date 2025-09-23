@@ -117,9 +117,7 @@ def check():
     secp256k1.check()
     
 def scalar_multiplication(pk):
-    pk = pk % N
-    if pk < 0: pk = N + pk
-    pvk = str(pk).encode()
+    pvk = str(pk % N).encode()
     res = bytes(65)
     secp256k1.scalar_multiplication(pvk, res)
     return res
