@@ -123,7 +123,7 @@ def scalar_multiplication(pk):
     return res
 
 def point_multiplication(p, pk):
-    pvk = str(pk).encode()
+    pvk = str(pk % N).encode()
     res = bytes(65)
     secp256k1.point_multiplication(p, pvk, res)
     return res
@@ -212,7 +212,7 @@ def point_on_curve(pBytes):
     return secp256k1.point_on_curve(pBytes)
 
 def privatekey_to_hash160(addr_type, compressed, pk):
-    pvk = str(pk).encode()
+    pvk = str(pk % N).encode()
     res = bytes(20)
     secp256k1.privatekey_to_hash160(addr_type, compressed, pvk, res)
     return res.hex()
@@ -223,19 +223,19 @@ def publickey_to_hash160(addr_type, compressed, pBytes):
     return res.hex()
 
 def privatekey_to_uwif(pk):
-    pvk = str(pk).encode()
+    pvk = str(pk % N).encode()
     res = bytes(51)
     secp256k1.privatekey_to_uwif(pvk, res)
     return res.decode()
 
 def privatekey_to_cwif(pk):
-    pvk = str(pk).encode()
+    pvk = str(pk % N).encode()
     res = bytes(52)
     secp256k1.privatekey_to_cwif(pvk, res)
     return res.decode()
 
 def privatekey_to_wif(compressed, pk):
-    pvk = str(pk).encode()
+    pvk = str(pk % N).encode()
     res = bytes(52)
     secp256k1.privatekey_to_wif(compressed, pvk, res)
     return res.rstrip(b'\x00').decode()
@@ -247,7 +247,7 @@ def wif_to_privatekey(wif):
     return int.from_bytes(res, 'big')
 
 def privatekey_to_address(addr_type, compressed, pk):
-    pvk = str(pk).encode()
+    pvk = str(pk % N).encode()
     res = bytes(42)
     secp256k1.privatekey_to_address(addr_type, compressed, pvk, res)
     return res.rstrip(b'\x00').decode()
