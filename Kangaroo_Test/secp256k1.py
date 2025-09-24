@@ -50,6 +50,9 @@ secp256k1.decrement_point.restype = None
 secp256k1.point_on_curve.argtypes = [ctypes.c_char_p]
 secp256k1.point_on_curve.restype = ctypes.c_bool
 
+secp256k1.get_y.argtypes = [ctypes.c_char_p, ctypes.c_bool, ctypes.c_char_p]
+secp256k1.get_y.restype = None
+
 secp256k1.privatekey_to_hash160.argtypes = [ctypes.c_int, ctypes.c_bool, ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.privatekey_to_hash160.restype = None
 
@@ -254,11 +257,15 @@ def hash160_to_address(addr_type, compressed, hash160):
     secp256k1.hash160_to_address(addr_type, compressed, bytes.fromhex(hash160), res)
     return res.rstrip(b'\x00').decode()
 
-def publickey_to_point(p):
-    pub = p.encode()
-    res = bytes(65)
-    secp256k1.publickey_to_point(pub, res)
-    return res
+def publickey_to_point(pub):
+    x = pub[2:66]
+    if len(pub) == 66:
+        res = bytes(32)
+        secp256k1.get_y(bytes.fromhex(x), int(pub[:2], 16) % 2 == 0, res)
+        y = res.hex()
+    else:
+        y = pub[66:]
+    return bytes.fromhex('04' + x + y)
 
 def p2pkh_address_to_hash160(address):
     addr = address.encode()
