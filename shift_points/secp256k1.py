@@ -157,13 +157,13 @@ def add_points_safe(p1, p2):
     return res
 
 def add_point_scalar(p, pk):
-    pvk = str(pk).encode()
+    pvk = str(pk % N).encode()
     res = bytes(65)
     secp256k1.add_point_scalar(p, pvk, res)
     return res
 
 def add_point_scalar_safe(p, pk):
-    pvk = str(pk).encode()
+    pvk = str(pk % N).encode()
     res = bytes(65)
     secp256k1.add_point_scalar_safe(p, pvk, res)
     return res
@@ -179,13 +179,13 @@ def subtract_points_safe(p1, p2):
     return res
 
 def subtract_point_scalar(p, pk):
-    pvk = str(pk).encode()
+    pvk = str(pk % N).encode()
     res = bytes(65)
     secp256k1.subtract_point_scalar(p, pvk, res)
     return res
 
 def subtract_point_scalar_safe(p, pk):
-    pvk = str(pk).encode()
+    pvk = str(pk % N).encode()
     res = bytes(65)
     secp256k1.subtract_point_scalar_safe(p, pvk, res)
     return res
