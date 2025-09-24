@@ -11,12 +11,6 @@ secp256k1.scalar_multiplication.restype = None
 secp256k1.point_multiplication.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.point_multiplication.restype = None
 
-secp256k1.point_to_upub.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
-secp256k1.point_to_upub.restype = None
-
-secp256k1.point_to_cpub.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
-secp256k1.point_to_cpub.restype = None
-
 secp256k1.double_point.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.double_point.restype = None
 
@@ -135,14 +129,12 @@ def point_division(p, pk):
     return res
 
 def point_to_upub(pBytes):
-    res = bytes(65)
-    secp256k1.point_to_upub(pBytes, res)
-    return res.hex()
-    
+    return pBytes.hex()
+
 def point_to_cpub(pBytes):
-    res = bytes(33)
-    secp256k1.point_to_cpub(pBytes, res)
-    return res.hex()
+    ph = pBytes.hex()
+    cpub = '02' + ph[2:66] if int(ph[66:], 16) % 2 == 0 else '03' + ph[2:66]
+    return cpub
 
 def double_point(pBytes):
     res = bytes(65)
