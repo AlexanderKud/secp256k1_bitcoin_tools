@@ -56,7 +56,7 @@ secp256k1.privatekey_to_uwif.restype = None
 secp256k1.privatekey_to_cwif.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.privatekey_to_cwif.restype = None
 
-secp256k1.wif_to_privatekey.argtypes = [ctypes.c_char_p]
+secp256k1.wif_to_privatekey.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.wif_to_privatekey.restype = None
 
 secp256k1.privatekey_to_address.argtypes = [ctypes.c_int, ctypes.c_bool, ctypes.c_char_p, ctypes.c_char_p]
