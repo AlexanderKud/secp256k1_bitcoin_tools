@@ -11,6 +11,9 @@ secp256k1.scalar_multiplication.restype = None
 secp256k1.point_multiplication.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.point_multiplication.restype = None
 
+secp256k1.point_division.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
+secp256k1.point_division.restype = None
+
 secp256k1.double_point.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.double_point.restype = None
 
@@ -103,10 +106,6 @@ secp256k1.bloom_add.restype = None
 
 secp256k1.bloom_check.argtypes = [ctypes.c_int, ctypes.c_char_p, ctypes.c_int]
 secp256k1.bloom_check.restype = ctypes.c_int
-
-N = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141
-def multiplicative_inverse(x):
-    return pow(x, N - 2, N)
     
 secp256k1.Init()
 
@@ -126,9 +125,9 @@ def point_multiplication(p, pk):
     return res
 
 def point_division(p, pk):
-    pvk = str(multiplicative_inverse(pk)).encode()
+    pvk = str(pk % N).encode()
     res = bytes(65)
-    secp256k1.point_multiplication(p, pvk, res)
+    secp256k1.point_division(p, pvk, res)
     return res
 
 def point_to_upub(pBytes):
