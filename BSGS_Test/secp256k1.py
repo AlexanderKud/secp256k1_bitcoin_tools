@@ -23,26 +23,14 @@ secp256k1.negate_point.restype = None
 secp256k1.add_points.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.add_points.restype = None
 
-secp256k1.add_points_safe.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
-secp256k1.add_points_safe.restype = None
-
 secp256k1.add_point_scalar.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.add_point_scalar.restype = None
-
-secp256k1.add_point_scalar_safe.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
-secp256k1.add_point_scalar_safe.restype = None
 
 secp256k1.subtract_points.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.subtract_points.restype = None
 
-secp256k1.subtract_points_safe.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
-secp256k1.subtract_points_safe.restype = None
-
 secp256k1.subtract_point_scalar.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.subtract_point_scalar.restype = None
-
-secp256k1.subtract_point_scalar_safe.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
-secp256k1.subtract_point_scalar_safe.restype = None
 
 secp256k1.increment_point.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.increment_point.restype = None
@@ -67,9 +55,6 @@ secp256k1.privatekey_to_uwif.restype = None
 
 secp256k1.privatekey_to_cwif.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
 secp256k1.privatekey_to_cwif.restype = None
-
-secp256k1.privatekey_to_wif.argtypes = [ctypes.c_bool, ctypes.c_char_p, ctypes.c_char_p]
-secp256k1.privatekey_to_wif.restype = None
 
 secp256k1.wif_to_privatekey.argtypes = [ctypes.c_char_p]
 secp256k1.wif_to_privatekey.restype = None
@@ -160,21 +145,10 @@ def add_points(p1, p2):
     secp256k1.add_points(p1, p2, res)
     return res
 
-def add_points_safe(p1, p2):
-    res = bytes(65)
-    secp256k1.add_points_safe(p1, p2, res)
-    return res
-
 def add_point_scalar(p, pk):
     pvk = str(pk % N).encode()
     res = bytes(65)
     secp256k1.add_point_scalar(p, pvk, res)
-    return res
-
-def add_point_scalar_safe(p, pk):
-    pvk = str(pk % N).encode()
-    res = bytes(65)
-    secp256k1.add_point_scalar_safe(p, pvk, res)
     return res
 
 def subtract_points(p1, p2):
@@ -182,21 +156,10 @@ def subtract_points(p1, p2):
     secp256k1.subtract_points(p1, p2, res)
     return res
 
-def subtract_points_safe(p1, p2):
-    res = bytes(65)
-    secp256k1.subtract_points_safe(p1, p2, res)
-    return res
-
 def subtract_point_scalar(p, pk):
     pvk = str(pk % N).encode()
     res = bytes(65)
     secp256k1.subtract_point_scalar(p, pvk, res)
-    return res
-
-def subtract_point_scalar_safe(p, pk):
-    pvk = str(pk % N).encode()
-    res = bytes(65)
-    secp256k1.subtract_point_scalar_safe(p, pvk, res)
     return res
 
 def increment_point(pBytes):
@@ -234,12 +197,6 @@ def privatekey_to_cwif(pk):
     res = bytes(52)
     secp256k1.privatekey_to_cwif(pvk, res)
     return res.decode()
-
-def privatekey_to_wif(compressed, pk):
-    pvk = str(pk % N).encode()
-    res = bytes(52)
-    secp256k1.privatekey_to_wif(compressed, pvk, res)
-    return res.rstrip(b'\x00').decode()
 
 def wif_to_privatekey(wif):
     pvk = wif.encode()

@@ -24,7 +24,7 @@ for i in range(bits_down):
     for p in group:
         point = bytes(bytearray.fromhex(p))
         final_group.append(secp256k1.point_multiplication(point, 57896044618658097711785492504343953926418782139537452191302581570759080747169).hex())
-        point = bytes(bytearray.fromhex(secp256k1.subtract_points_safe(point, G).hex()))        
+        point = bytes(bytearray.fromhex(secp256k1.subtract_points(point, G).hex()))        
         final_group.append(secp256k1.point_multiplication(point, 57896044618658097711785492504343953926418782139537452191302581570759080747169).hex())
     group = final_group
 print(f'Number of points: {len(final_group)}')
