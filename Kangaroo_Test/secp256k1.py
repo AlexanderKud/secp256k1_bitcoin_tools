@@ -106,6 +106,8 @@ secp256k1.bloom_add.restype = None
 
 secp256k1.bloom_check.argtypes = [ctypes.c_int, ctypes.c_char_p, ctypes.c_int]
 secp256k1.bloom_check.restype = ctypes.c_int
+
+N = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141
     
 secp256k1.Init()
 
