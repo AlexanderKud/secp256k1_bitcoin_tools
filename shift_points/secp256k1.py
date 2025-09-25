@@ -107,7 +107,12 @@ secp256k1.bloom_add.restype = None
 secp256k1.bloom_check.argtypes = [ctypes.c_int, ctypes.c_char_p, ctypes.c_int]
 secp256k1.bloom_check.restype = ctypes.c_int
 
-N = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141
+N       = 0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141
+lambda1 = 0x5363ad4cc05c30e0a5261c028812645a122e22ea20816678df02967c1b23bd72
+lambda2 = 0xac9c52b33fa3cf1f5ad9e3fd77ed9ba4a880b9fc8ec739c2e0cfc810b51283ce
+P       = 0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f
+beta    = 0x7ae96a2b657c07106e64479eac3434e99cf0497512f58995c1396c28719501ee
+beta2   = 0x851695d49a83f8ef919bb86153cbcb16630fb68aed0a766a3ec693d68e6afa40
     
 secp256k1.Init()
 
