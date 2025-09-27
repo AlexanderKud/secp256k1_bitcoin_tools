@@ -3,10 +3,10 @@ import gmpy2
 import platform
 
 if platform.system() == 'Linux':
-    print('Loading Linux Shared Library')
+    #print('Loading Linux Shared Library')
     secp256k1 = ctypes.CDLL("./secp256k1_lib.so")
 if platform.system() == 'Windows':
-    print('Loading Windows Shared Library')
+    #print('Loading Windows Shared Library')
     secp256k1 = ctypes.CDLL("./secp256k1_lib.dll")
 
 secp256k1.check.argtypes = None
