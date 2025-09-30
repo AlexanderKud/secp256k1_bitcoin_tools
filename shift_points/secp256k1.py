@@ -1,7 +1,11 @@
 import ctypes
 import gmpy2
+import platform
 
-secp256k1 = ctypes.CDLL("./secp256k1_lib.so")
+if platform.system() == 'Linux':
+    secp256k1 = ctypes.CDLL("./secp256k1_lib.so")
+elif platform.system() == 'Windows':
+    secp256k1 = ctypes.CDLL("./secp256k1_lib.dll")
 
 secp256k1.check.argtypes = None
 secp256k1.check.restype = None
@@ -154,7 +158,7 @@ def subtract_points(p1, p2):
     res = bytes(65)
     secp256k1.subtract_points(p1, p2, res)
     return res
-    
+
 def subtract_point_scalar(p, pk):
     pvk = str(pk % N).encode()
     res = bytes(65)
@@ -230,8 +234,9 @@ def publickey_to_point(pub):
     return bytes.fromhex('04' + x + y)
 
 def p2pkh_address_to_hash160(address):
+    addr = address.encode()
     res = bytes(25)
-    secp256k1.p2pkh_address_to_hash160(address.encode(), res)
+    secp256k1.p2pkh_address_to_hash160(addr, res)
     return res.hex()[2:42]
     
 def init_bloom(index, entries, error):
