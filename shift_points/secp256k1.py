@@ -1,13 +1,7 @@
 import ctypes
 import gmpy2
-import platform
 
-if platform.system() == 'Linux':
-    #print('Loading Linux Shared Library')
-    secp256k1 = ctypes.CDLL("./secp256k1_lib.so")
-elif platform.system() == 'Windows':
-    #print('Loading Windows Shared Library')
-    secp256k1 = ctypes.CDLL("./secp256k1_lib.dll")
+secp256k1 = ctypes.CDLL("./secp256k1_lib.so")
 
 secp256k1.check.argtypes = None
 secp256k1.check.restype = None
@@ -131,8 +125,9 @@ def point_to_upub(pBytes):
 
 def point_to_cpub(pBytes):
     ph = pBytes.hex()
-    cpub = '02' + ph[2:66] if int(ph[66:], 16) % 2 == 0 else '03' + ph[2:66]
-    return cpub
+    last_byte = int(ph[128:130], 16)
+    prefix = '02' if (last_byte & 1) == 0 else '03'
+    return prefix + ph[2:66]
 
 def double_point(pBytes):
     res = bytes(65)
@@ -159,7 +154,7 @@ def subtract_points(p1, p2):
     res = bytes(65)
     secp256k1.subtract_points(p1, p2, res)
     return res
-
+    
 def subtract_point_scalar(p, pk):
     pvk = str(pk % N).encode()
     res = bytes(65)
@@ -235,9 +230,8 @@ def publickey_to_point(pub):
     return bytes.fromhex('04' + x + y)
 
 def p2pkh_address_to_hash160(address):
-    addr = address.encode()
     res = bytes(25)
-    secp256k1.p2pkh_address_to_hash160(addr, res)
+    secp256k1.p2pkh_address_to_hash160(address.encode(), res)
     return res.hex()[2:42]
     
 def init_bloom(index, entries, error):
