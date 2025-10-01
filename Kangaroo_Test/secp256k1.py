@@ -193,34 +193,34 @@ def privatekey_to_uwif(pk):
     pvk = (pk % N).to_bytes(32, 'big')
     res = bytes(51)
     secp256k1.privatekey_to_uwif(pvk, res)
-    return res.decode()
+    return res.decode('utf-8')
 
 def privatekey_to_cwif(pk):
     pvk = (pk % N).to_bytes(32, 'big')
     res = bytes(52)
     secp256k1.privatekey_to_cwif(pvk, res)
-    return res.decode()
+    return res.decode('utf-8')
 
 def wif_to_privatekey(wif):
     res = bytes(32)
-    secp256k1.wif_to_privatekey(wif.encode(), res)
+    secp256k1.wif_to_privatekey(wif.encode('utf-8'), res)
     return int.from_bytes(res, 'big')
 
 def privatekey_to_address(addr_type, compressed, pk):
     pvk = (pk % N).to_bytes(32, 'big')
     res = bytes(42)
     secp256k1.privatekey_to_address(addr_type, compressed, pvk, res)
-    return res.rstrip(b'\x00').decode()
+    return res.rstrip(b'\x00').decode('utf-8')
     
 def publickey_to_address(addr_type, compressed, p):
     res = bytes(42)
     secp256k1.publickey_to_address(addr_type, compressed, p, res)
-    return res.rstrip(b'\x00').decode()
+    return res.rstrip(b'\x00').decode('utf-8')
 
 def hash160_to_address(addr_type, compressed, hash160):
     res = bytes(42)
     secp256k1.hash160_to_address(addr_type, compressed, bytes.fromhex(hash160), res)
-    return res.rstrip(b'\x00').decode()
+    return res.rstrip(b'\x00').decode('utf-8')
 
 def publickey_to_point(pub):
     x = pub[2:66]
@@ -234,7 +234,7 @@ def publickey_to_point(pub):
 
 def p2pkh_address_to_hash160(address):
     res = bytes(25)
-    secp256k1.p2pkh_address_to_hash160(address.encode(), res)
+    secp256k1.p2pkh_address_to_hash160(address.encode('utf-8'), res)
     return res.hex()[2:42]
     
 def init_bloom(index, entries, error):
@@ -244,15 +244,15 @@ def bloom_info(index):
     secp256k1.bloom_info(index)
 
 def bloom_save(index, filename):
-    secp256k1.bloom_save(index, filename.encode())
+    secp256k1.bloom_save(index, filename.encode('utf-8'))
     
 def bloom_load(index, filename):
-    secp256k1.bloom_load(index, filename.encode())
+    secp256k1.bloom_load(index, filename.encode('utf-8'))
 
 def bloom_add(index, item):
-    if type(item) != bytes: item = str(item).encode()
+    if type(item) != bytes: item = str(item).encode('utf-8')
     secp256k1.bloom_add(index, item, len(item))
 
 def bloom_check(index, item):
-    if type(item) != bytes: item = str(item).encode()
+    if type(item) != bytes: item = str(item).encode('utf-8')
     return secp256k1.bloom_check(index, item, len(item))
