@@ -202,9 +202,8 @@ def privatekey_to_cwif(pk):
     return res.decode()
 
 def wif_to_privatekey(wif):
-    pvk = wif.encode()
     res = bytes(32)
-    secp256k1.wif_to_privatekey(pvk, res)
+    secp256k1.wif_to_privatekey(wif.encode(), res)
     return int.from_bytes(res, 'big')
 
 def privatekey_to_address(addr_type, compressed, pk):
@@ -234,9 +233,8 @@ def publickey_to_point(pub):
     return bytes.fromhex('04' + x + y)
 
 def p2pkh_address_to_hash160(address):
-    addr = address.encode()
     res = bytes(25)
-    secp256k1.p2pkh_address_to_hash160(addr, res)
+    secp256k1.p2pkh_address_to_hash160(address.encode(), res)
     return res.hex()[2:42]
     
 def init_bloom(index, entries, error):
