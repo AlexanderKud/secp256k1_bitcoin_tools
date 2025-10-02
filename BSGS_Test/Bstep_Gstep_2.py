@@ -20,7 +20,7 @@ for i in range(0, m + 1):
     points.append(cpub[2:slice_width])
 
 print('- BSGS Search in progress')
-S = secp256k1.subtract_points_safe(P, start_range_P)
+S = secp256k1.subtract_points(P, start_range_P)
 step = 0
 b = 0
 baby_table = tuple(points)
@@ -36,7 +36,7 @@ while step < (end_range - start_range):
             print("- Time Spent : {0:.2f} seconds".format(time.time()-st))
             sys.exit()
     
-    S = secp256k1.subtract_points_safe(S, m_P)
+    S = secp256k1.subtract_points(S, m_P)
     step += m
         
 print('- Key not found')
