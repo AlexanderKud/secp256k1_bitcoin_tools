@@ -217,6 +217,11 @@ def publickey_to_address(addr_type, compressed, p):
     secp256k1.publickey_to_address(addr_type, compressed, p, res)
     return res.rstrip(b'\x00').decode('utf-8')
 
+def publickey_to_bech32_p2wsh_address(p):
+    res = bytes(62)
+    secp256k1.publickey_to_address(3, True, p, res)
+    return res.decode('utf-8')
+
 def hash160_to_address(addr_type, compressed, hash160):
     res = bytes(42)
     secp256k1.hash160_to_address(addr_type, compressed, bytes.fromhex(hash160), res)
