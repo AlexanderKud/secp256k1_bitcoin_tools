@@ -155,22 +155,14 @@ def negate_point(pBytes):
     return res
 
 def point_endo1(pBytes):
-    pref = pBytes[:1]
-    x_bytes = pBytes[1:33]
-    y_bytes = pBytes[33:]
-    x_int = int.from_bytes(x_bytes, 'big')
-    x_int = (x_int*beta1) % P
+    x_int = (int.from_bytes(pBytes[1:33], 'big') * beta1) % P
     x_bytes = x_int.to_bytes(32, 'big')
-    return pref+x_bytes+y_bytes
+    return pBytes[:1] + x_bytes + pBytes[33:]
 
 def point_endo2(pBytes):
-    pref = pBytes[:1]
-    x_bytes = pBytes[1:33]
-    y_bytes = pBytes[33:]
-    x_int = int.from_bytes(x_bytes, 'big')
-    x_int = (x_int*beta2) % P
+    x_int = (int.from_bytes(pBytes[1:33], 'big') * beta2) % P
     x_bytes = x_int.to_bytes(32, 'big')
-    return pref+x_bytes+y_bytes
+    return pBytes[:1] + x_bytes + pBytes[33:]
     
 def priv_endo1(pk):
     return (pk * lambda1) % N
