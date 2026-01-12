@@ -172,6 +172,12 @@ def point_endo2(pBytes):
     x_bytes = x_int.to_bytes(32, 'big')
     return pref+x_bytes+y_bytes
     
+def priv_endo1(pk):
+    return (pk * lambda1) % N
+
+def priv_endo2(pk):
+    return (pk * lambda2) % N
+    
 def add_points(p1, p2):
     res = bytes(65)
     secp256k1.add_points(p1, p2, res)
