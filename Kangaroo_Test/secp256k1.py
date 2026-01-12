@@ -154,6 +154,24 @@ def negate_point(pBytes):
     secp256k1.negate_point(pBytes, res)
     return res
 
+def point_endo1(pBytes):
+    pref = pBytes[:1]
+    x_bytes = pBytes[1:33]
+    y_bytes = pBytes[33:]
+    x_int = int.from_bytes(x_bytes, 'big')
+    x_int = (x_int*beta1) % P
+    x_bytes = x_int.to_bytes(32, 'big')
+    return pref+x_bytes+y_bytes
+
+def point_endo2(pBytes):
+    pref = pBytes[:1]
+    x_bytes = pBytes[1:33]
+    y_bytes = pBytes[33:]
+    x_int = int.from_bytes(x_bytes, 'big')
+    x_int = (x_int*beta2) % P
+    x_bytes = x_int.to_bytes(32, 'big')
+    return pref+x_bytes+y_bytes
+    
 def add_points(p1, p2):
     res = bytes(65)
     secp256k1.add_points(p1, p2, res)
